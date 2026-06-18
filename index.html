@@ -364,6 +364,57 @@
         <textarea name="mensagem" rows="3" placeholder="Qual livro ou ideia você tem em mente?"></textarea>
         <button type="submit">Enviar mensagem</button>
       </form>
+      <script>
+        const SUPABASE_URL = "https://mlkhoibaqnvpkhziaidx.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_9GhUDhp7tn5rwsN8T_ZHdg_oGovsEfe";
+
+        const pedidoForm = document.getElementById('pedido-form');
+        pedidoForm.addEventListener('submit', async function (e) {
+          e.preventDefault();
+          const btn = pedidoForm.querySelector('button');
+          const originalLabel = btn.textContent;
+          btn.disabled = true;
+          btn.textContent = 'Enviando...';
+
+          const payload = {
+            nome: pedidoForm.nome.value,
+            whatsapp: pedidoForm.whatsapp.value,
+            mensagem: pedidoForm.mensagem.value
+          };
+
+          try {
+            const resp = await fetch(SUPABASE_URL + '/rest/v1/mateus_pedidos', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'apikey': SUPABASE_KEY,
+                'Authorization': 'Bearer ' + SUPABASE_KEY,
+                'Prefer': 'return=minimal'
+              },
+              body: JSON.stringify(payload)
+            });
+
+            if (!resp.ok) throw new Error('Falha ao enviar');
+
+            // dispara o aviso de WhatsApp (não trava o sucesso se essa parte falhar)
+            fetch('/api/notify-whatsapp', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            }).catch(function () {});
+
+            btn.textContent = 'Mensagem enviada!';
+            pedidoForm.reset();
+          } catch (err) {
+            btn.textContent = 'Erro, tenta de novo';
+          } finally {
+            setTimeout(function () {
+              btn.disabled = false;
+              btn.textContent = originalLabel;
+            }, 3000);
+          }
+        });
+      </script>
     </div>
     <div class="bottom-line">
       <span>© 2026 Mateus Cardoso Artes</span>
