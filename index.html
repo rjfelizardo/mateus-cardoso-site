@@ -184,6 +184,40 @@
     align-self:flex-start;font-size:.8rem;font-weight:700;
     background:var(--yellow);padding:4px 12px;border-radius:100px;
   }
+  .preview-btn{
+    background:none;border:1.5px solid var(--ink);border-radius:100px;
+    padding:3px 14px;font-size:.78rem;font-weight:700;cursor:pointer;
+    font-family:var(--body);color:var(--ink);
+  }
+  .preview-btn:hover{background:var(--ink);color:var(--paper);}
+
+  .lightbox-overlay{
+    position:fixed;inset:0;background:rgba(30,43,51,.85);
+    display:none;align-items:center;justify-content:center;
+    z-index:200;padding:24px;
+  }
+  .lightbox-overlay.open{display:flex;}
+  .lightbox-box{
+    background:var(--paper);border-radius:20px;padding:20px;
+    max-width:420px;width:100%;position:relative;
+  }
+  .lightbox-box img{
+    width:100%;border-radius:12px;max-height:60vh;
+    object-fit:contain;background:var(--paper-deep);display:block;
+  }
+  .lightbox-nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;}
+  .lightbox-nav button{
+    background:var(--ink);color:var(--paper);border:none;
+    border-radius:100px;padding:8px 18px;font-weight:700;cursor:pointer;
+    font-family:var(--body);
+  }
+  .lightbox-count{font-family:var(--hand);color:var(--teal);font-size:1.1rem;}
+  .lightbox-close{
+    position:absolute;top:-14px;right:-14px;width:36px;height:36px;
+    border-radius:50%;background:var(--orange);color:var(--paper);
+    border:none;font-size:1.1rem;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+  }
   .price{font-weight:700;font-size:1.1rem;margin-top:auto;}
   .price.placeholder{color:#8a7a5f;font-style:italic;font-weight:600;font-size:.95rem;}
 
@@ -311,16 +345,22 @@
       <div class="book-card">
         <div class="cover"><img src="https://static.wixstatic.com/media/21ae16_73fb5a4a535b4f9d8411592cd261f38c~mv2.png" alt="Capa de O Tucano Eugênio"></div>
         <div class="info">
-          <span class="badge">Disponível</span>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span class="badge">Disponível</span>
+            <button class="preview-btn" onclick="openPreview('tucano')" type="button">Prévia</button>
+          </div>
           <h3>O Tucano Eugênio</h3>
           <p>Em versos rimados, a história de um pássaro que aprende sobre compartilhar, perdoar e valorizar os momentos em grupo.</p>
-          <a href="https://loja.umlivro.com.br/o-tucano-eugenio-7342143/p" target="_blank" class="price" style="color:var(--teal);">Comprar pelo Whatsapp →</a>
+          <a href="https://loja.umlivro.com.br/o-tucano-eugenio-7342143/p" target="_blank" class="price" style="color:var(--teal);">Comprar →</a>
         </div>
       </div>
       <div class="book-card">
         <div class="cover"><img src="https://static.wixstatic.com/media/21ae16_a9c27d8b1e0a491583d0a17320bc91b8~mv2.jpeg" alt="Capa de Emanuel Salva Noel"></div>
         <div class="info">
-          <span class="badge">Disponível</span>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span class="badge">Disponível</span>
+            <button class="preview-btn" onclick="openPreview('emanuel')" type="button">Prévia</button>
+          </div>
           <h3>Emanuel Salva Noel</h3>
           <p>Uma jornada pelos biomas do Brasil em busca de salvar o Natal — sobre cultura, natureza e amizade.</p>
           <a href="https://wa.me/5575991992399" target="_blank" class="price" style="color:var(--teal);">Comprar pelo WhatsApp →</a>
@@ -418,6 +458,60 @@
     </div>
   </div>
 </footer>
+
+<div class="lightbox-overlay" id="lightbox-overlay">
+  <div class="lightbox-box">
+    <button class="lightbox-close" onclick="closePreview()" aria-label="Fechar">×</button>
+    <img id="lightbox-img" src="" alt="Prévia do livro">
+    <div class="lightbox-nav">
+      <button type="button" onclick="prevPreview()">‹ Anterior</button>
+      <span class="lightbox-count" id="lightbox-count"></span>
+      <button type="button" onclick="nextPreview()">Próxima ›</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  var previewImages = {
+    tucano: [
+      "https://static.wixstatic.com/media/21ae16_73fb5a4a535b4f9d8411592cd261f38c~mv2.png",
+      "https://static.wixstatic.com/media/21ae16_1f916d2afdea4e4d8bfa9cb13b10e162~mv2.png",
+      "https://static.wixstatic.com/media/21ae16_248201c78c4b4ffd84f350efea00604b~mv2.jpeg"
+    ],
+    emanuel: [
+      "https://static.wixstatic.com/media/21ae16_a9c27d8b1e0a491583d0a17320bc91b8~mv2.jpeg",
+      "https://static.wixstatic.com/media/21ae16_9c71b4401526488e9e554da173739cd4~mv2.jpeg",
+      "https://static.wixstatic.com/media/21ae16_9334d4b9aa2a459ea51749d73b79a209~mv2.png"
+    ]
+  };
+  var currentPreview = [];
+  var currentIndex = 0;
+
+  function renderPreview(){
+    document.getElementById('lightbox-img').src = currentPreview[currentIndex];
+    document.getElementById('lightbox-count').textContent = (currentIndex + 1) + ' de ' + currentPreview.length;
+  }
+  function openPreview(key){
+    currentPreview = previewImages[key];
+    currentIndex = 0;
+    renderPreview();
+    document.getElementById('lightbox-overlay').classList.add('open');
+  }
+  function closePreview(){
+    document.getElementById('lightbox-overlay').classList.remove('open');
+  }
+  function nextPreview(){
+    currentIndex = (currentIndex + 1) % currentPreview.length;
+    renderPreview();
+  }
+  function prevPreview(){
+    currentIndex = (currentIndex - 1 + currentPreview.length) % currentPreview.length;
+    renderPreview();
+  }
+  document.getElementById('lightbox-overlay').addEventListener('click', function(e){
+    if (e.target === this) closePreview();
+  });
+</script>
 
 </body>
 </html>
