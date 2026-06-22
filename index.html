@@ -113,15 +113,22 @@
     display:flex;flex-direction:column;gap:36px;align-items:center;text-align:center;
     position:relative;z-index:1;
   }
-  .eyebrow{font-family:var(--hand);font-size:1.4rem;color:var(--orange);transform:rotate(-2deg);}
+  .eyebrow{
+    font-family:var(--hand);font-size:1.4rem;color:var(--orange);transform:rotate(-2deg);
+    text-shadow:0 0 8px rgba(251,241,225,1), 0 0 16px rgba(251,241,225,1);
+  }
   h1.headline{
     font-family:var(--display);
-    font-weight:600;
+    font-weight:700;
     font-size:clamp(2.4rem, 6vw, 4rem);
     line-height:1.05;
+    text-shadow:0 0 8px rgba(251,241,225,1), 0 0 20px rgba(251,241,225,.9), 0 2px 4px rgba(251,241,225,1);
   }
-  h1.headline em{font-style:italic;font-weight:500;color:var(--teal);}
-  .sub{max-width:520px;font-size:1.1rem;color:#3c4a52;}
+  h1.headline em{font-style:italic;font-weight:700;color:var(--teal);}
+  .sub{
+    max-width:520px;font-size:1.1rem;color:#1E2B33;font-weight:700;
+    text-shadow:0 0 8px rgba(251,241,225,1), 0 0 16px rgba(251,241,225,1);
+  }
   .cta-row{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
   .hero-art{
     position:relative;width:100%;max-width:420px;
