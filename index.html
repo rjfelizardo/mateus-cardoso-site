@@ -99,9 +99,19 @@
     position:relative;
     padding:64px 24px 80px;
     overflow:hidden;
+    background-image: url('https://static.wixstatic.com/media/21ae16_308318070236465fab6582c21c4cfc93~mv2.png');
+    background-size: cover;
+    background-position: center top;
+  }
+  .hero::before{
+    content:'';
+    position:absolute;inset:0;
+    background:rgba(251,241,225,.55);
+    z-index:0;
   }
   .hero .wrap{
     display:flex;flex-direction:column;gap:36px;align-items:center;text-align:center;
+    position:relative;z-index:1;
   }
   .eyebrow{font-family:var(--hand);font-size:1.4rem;color:var(--orange);transform:rotate(-2deg);}
   h1.headline{
@@ -448,7 +458,6 @@
 
             if (!resp.ok) throw new Error('Falha ao enviar');
 
-            // dispara o aviso de WhatsApp (não trava o sucesso se essa parte falhar)
             fetch('/api/notify-whatsapp', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
