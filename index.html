@@ -56,8 +56,11 @@
   .hero .copy{display:flex;flex-direction:column;padding-top:40px;}
   .eyebrow-art{
     font-family:var(--hand);font-size:1.4rem;color:var(--orange);transform:rotate(-2deg);
-    text-shadow:0 0 8px rgba(251,241,225,1),0 0 16px rgba(251,241,225,1);
-    display:inline-block;margin-bottom:8px;text-align:center;
+    display:inline-block;margin-bottom:12px;text-align:center;
+    background:rgba(251,241,225,.82);
+    padding:4px 16px;border-radius:100px;
+    backdrop-filter:blur(4px);
+    box-shadow:0 2px 8px rgba(30,43,51,.1);
   }
   h1.headline{
     font-family:var(--display);font-weight:700;font-size:clamp(2.4rem,6vw,4rem);line-height:1.05;
@@ -86,6 +89,7 @@
   /* ---------- sobre ---------- */
   .sobre{background:var(--paper-deep);}
   .sobre .grid{display:flex;flex-direction:column;gap:40px;}
+  .sobre .foto-grid{display:flex;flex-direction:column;gap:16px;max-width:320px;}
   .sobre img{border-radius:24px;width:100%;max-width:320px;}
   .sobre p{max-width:600px;font-size:1.05rem;}
   .sobre blockquote{font-family:var(--hand);font-size:1.5rem;color:var(--orange);margin-top:20px;transform:rotate(-1deg);max-width:480px;}
@@ -93,16 +97,8 @@
 
   /* ---------- o que ele faz ---------- */
   .faz-grid{display:flex;flex-wrap:wrap;gap:24px;list-style:none;padding:0;justify-content:flex-start;}
-  .faz-card{
-    display:flex;flex-direction:column;align-items:center;gap:12px;
-    width:140px;text-align:center;cursor:pointer;
-  }
-  .faz-card .faz-img{
-    width:120px;height:120px;border-radius:50%;overflow:hidden;
-    border:4px solid var(--paper);
-    box-shadow:0 8px 24px -8px rgba(30,43,51,.25);
-    transition:transform .2s ease, box-shadow .2s ease;
-  }
+  .faz-card{display:flex;flex-direction:column;align-items:center;gap:12px;width:140px;text-align:center;cursor:pointer;}
+  .faz-card .faz-img{width:120px;height:120px;border-radius:50%;overflow:hidden;border:4px solid var(--paper);box-shadow:0 8px 24px -8px rgba(30,43,51,.25);transition:transform .2s ease, box-shadow .2s ease;}
   .faz-card:hover .faz-img{transform:translateY(-4px);box-shadow:0 16px 32px -8px rgba(30,43,51,.3);}
   .faz-card .faz-img img{width:100%;height:100%;object-fit:cover;}
   .faz-card span{font-weight:700;font-size:.95rem;color:var(--ink);}
@@ -124,43 +120,24 @@
   .book-card .cover img{width:100%;height:100%;object-fit:cover;object-position:top center;}
   .book-card .info{padding:22px;display:flex;flex-direction:column;gap:8px;flex:1;}
   .book-card h3{font-family:var(--display);font-size:1.3rem;font-weight:600;}
+  .book-meta{font-size:.85rem;color:#6b7a80;display:flex;gap:12px;flex-wrap:wrap;}
   .badge{align-self:flex-start;font-size:.8rem;font-weight:700;background:var(--yellow);padding:4px 12px;border-radius:100px;}
   .preview-btn{background:none;border:1.5px solid var(--ink);border-radius:100px;padding:3px 14px;font-size:.78rem;font-weight:700;cursor:pointer;font-family:var(--body);color:var(--ink);}
   .preview-btn:hover{background:var(--ink);color:var(--paper);}
   .price{font-weight:700;font-size:1.1rem;margin-top:auto;}
 
   /* ---------- contação ---------- */
-  .contacao-grid{
-    display:flex;flex-direction:column;gap:32px;align-items:flex-start;
-  }
-  .contacao-foto{
-    width:100%;max-width:520px;border-radius:24px;overflow:hidden;
-    box-shadow:0 18px 32px -18px rgba(30,43,51,.3);
-    flex-shrink:0;
-  }
+  .contacao-grid{display:flex;flex-direction:column;gap:32px;align-items:flex-start;}
+  .contacao-foto{width:100%;max-width:520px;border-radius:24px;overflow:hidden;box-shadow:0 18px 32px -18px rgba(30,43,51,.3);flex-shrink:0;}
   .contacao-foto img{width:100%;height:340px;object-fit:cover;object-position:center top;}
   .contacao-side{display:flex;flex-direction:column;gap:20px;}
-  .video-card{
-    width:100%;max-width:420px;aspect-ratio:16/9;border-radius:20px;
-    background:linear-gradient(135deg,var(--teal),var(--ink));
-    display:flex;align-items:center;justify-content:center;color:var(--paper);
-    font-family:var(--hand);font-size:1.3rem;text-align:center;padding:24px;
-  }
-  .yt-btn{
-    display:inline-flex;align-items:center;gap:10px;
-    background:#FF0000;color:#fff;font-weight:700;font-size:1rem;
-    padding:14px 24px;border-radius:100px;
-    transition:transform .15s ease,box-shadow .15s ease;
-    align-self:flex-start;
-  }
+  .video-card{width:100%;max-width:420px;aspect-ratio:16/9;border-radius:20px;background:linear-gradient(135deg,var(--teal),var(--ink));display:flex;align-items:center;justify-content:center;color:var(--paper);font-family:var(--hand);font-size:1.3rem;text-align:center;padding:24px;}
+  .yt-btn{display:inline-flex;align-items:center;gap:10px;background:#FF0000;color:#fff;font-weight:700;font-size:1rem;padding:14px 24px;border-radius:100px;transition:transform .15s ease,box-shadow .15s ease;align-self:flex-start;}
   .yt-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px -6px rgba(255,0,0,.5);}
   .yt-btn svg{width:24px;height:24px;flex-shrink:0;}
-  @media(min-width:880px){
-    .contacao-grid{flex-direction:row;align-items:center;gap:48px;}
-    .contacao-foto{max-width:480px;}
-  }
+  @media(min-width:880px){.contacao-grid{flex-direction:row;align-items:center;gap:48px;}.contacao-foto{max-width:480px;}}
 
-  /* ---------- lightbox ---------- */
+  /* ---------- lightbox texto ---------- */
   .lightbox-overlay{position:fixed;inset:0;background:rgba(30,43,51,.85);display:none;align-items:center;justify-content:center;z-index:200;padding:24px;}
   .lightbox-overlay.open{display:flex;}
   .lightbox-box{background:var(--paper);border-radius:20px;padding:28px 24px 20px;max-width:540px;width:100%;position:relative;}
@@ -182,11 +159,27 @@
   @media(min-width:880px){.contact-grid{flex-direction:row;justify-content:space-between;}}
   .contact-info p{margin-bottom:10px;color:#dbe3e5;}
   .contact-info a:hover{color:var(--yellow);}
+  .social-icons{display:flex;gap:14px;margin-top:8px;}
+  .social-icons a{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:rgba(251,241,225,.1);color:var(--paper);transition:background .15s ease;}
+  .social-icons a:hover{background:var(--orange);}
+  .social-icons svg{width:20px;height:20px;}
   form.contact-form{display:flex;flex-direction:column;gap:14px;max-width:380px;width:100%;}
   form.contact-form input,form.contact-form textarea{background:rgba(251,241,225,.08);border:1px solid rgba(251,241,225,.25);border-radius:12px;padding:12px 16px;color:var(--paper);font-family:var(--body);}
   form.contact-form input::placeholder,form.contact-form textarea::placeholder{color:#a9b6ba;}
   form.contact-form button{background:var(--orange);color:var(--ink);font-weight:700;border:none;border-radius:100px;padding:14px;cursor:pointer;}
   .bottom-line{margin-top:56px;padding-top:24px;border-top:1px solid rgba(251,241,225,.15);display:flex;flex-direction:column;gap:8px;font-size:.85rem;color:#9fb0b4;}
+
+  /* ---------- WhatsApp flutuante ---------- */
+  .wa-float{
+    position:fixed;bottom:28px;right:28px;z-index:100;
+    width:56px;height:56px;border-radius:50%;
+    background:#25D366;color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 24px -4px rgba(37,211,102,.5);
+    transition:transform .15s ease,box-shadow .15s ease;
+  }
+  .wa-float:hover{transform:translateY(-3px);box-shadow:0 12px 28px -4px rgba(37,211,102,.6);}
+  .wa-float svg{width:30px;height:30px;}
 </style>
 </head>
 <body>
@@ -225,11 +218,12 @@
 <section class="hero">
   <div class="wrap">
     <div class="copy">
+      <span class="eyebrow-art">rabiscado por Eugênio, o tucano</span>
       <h1 class="headline">Histórias que <em>rimam</em><br>com a infância</h1>
       <p class="sub">Livros, ilustrações e contação de histórias assinados por Mateus Cardoso, autor de <strong>O Tucano Eugênio</strong>.</p>
     </div>
     <div class="hero-art-wrap">
-       <div class="hero-art">
+      <div class="hero-art">
         <img src="https://static.wixstatic.com/media/21ae16_73fb5a4a535b4f9d8411592cd261f38c~mv2.png" alt="O Tucano Eugênio, de Mateus Cardoso">
       </div>
     </div>
@@ -245,7 +239,10 @@
       <h2>Sobre o autor</h2>
     </div>
     <div class="grid">
-      <img src="https://static.wixstatic.com/media/21ae16_254ee6fc790f47f98e8a758d14d4f3d9~mv2.jpeg" alt="Mateus Cardoso">
+      <div class="foto-grid">
+        <img src="https://static.wixstatic.com/media/21ae16_254ee6fc790f47f98e8a758d14d4f3d9~mv2.jpeg" alt="Mateus Cardoso">
+        <img src="images/mateus-ukulele.jpeg" alt="Mateus Cardoso com ukulele" style="max-width:320px;">
+      </div>
       <div>
         <p>Nascido em Salvador e criado em Feira de Santana, Mateus sempre encontrou na arte uma forma de expressão. Ainda criança, vendia gibis feitos à mão na feira de livros da escola.</p><br>
         <p>Formado em Arquitetura e Urbanismo pela UFBA, levou para a escrita o mesmo cuidado com forma e proporção que aprendeu nos traços técnicos. Foi o nascimento do primeiro filho que o trouxe de volta aos livros infantis — e dessa redescoberta nasceu <strong>O Tucano Eugênio</strong>, história em versos que abriu caminho para a obra <strong>Emanuel salva Noel</strong>, e as próximas obras em desenvolvimento.</p>
@@ -254,6 +251,8 @@
     </div>
   </div>
 </section>
+
+<div class="divider">histórias que encantam</div>
 
 <section class="faz">
   <div class="wrap">
@@ -286,6 +285,8 @@
   </div>
 </section>
 
+<div class="divider">cada página, uma descoberta</div>
+
 <section class="livros" id="livros">
   <div class="wrap">
     <div class="section-head">
@@ -301,8 +302,12 @@
             <button class="preview-btn" onclick="openPreview('tucano')" type="button">Prévia</button>
           </div>
           <h3>O Tucano Eugênio</h3>
+          <div class="book-meta">
+            <span>📖 Livro bilíngue</span>
+            <span>🎯 A partir de 4 anos</span>
+          </div>
           <p>Em versos rimados, a história de um pássaro que aprende sobre compartilhar, perdoar e valorizar os momentos em grupo.</p>
-          <a href="https://loja.umlivro.com.br/o-tucano-eugenio-7342143/p" target="_blank" class="price" style="color:var(--teal);">Comprar pelo Whatsapp →</a>
+          <a href="https://wa.me/5575991992399" target="_blank" class="price" style="color:var(--teal);">Comprar pelo WhatsApp →</a>
         </div>
       </div>
       <div class="book-card">
@@ -313,6 +318,10 @@
             <button class="preview-btn" onclick="openPreview('emanuel')" type="button">Prévia</button>
           </div>
           <h3>Emanuel Salva Noel</h3>
+          <div class="book-meta">
+            <span>📖 Romance juvenil</span>
+            <span>🎯 A partir de 8 anos</span>
+          </div>
           <p>Uma jornada pelos biomas do Brasil em busca de salvar o Natal — sobre cultura, natureza e amizade.</p>
           <a href="https://wa.me/5575991992399" target="_blank" class="price" style="color:var(--teal);">Comprar pelo WhatsApp →</a>
         </div>
@@ -320,6 +329,8 @@
     </div>
   </div>
 </section>
+
+<div class="divider">de viva voz</div>
 
 <section class="contacao" id="historias">
   <div class="wrap">
@@ -355,6 +366,17 @@
         <p>✉️ <a href="mailto:mateuscaroliv@gmail.com">mateuscaroliv@gmail.com</a></p>
         <p>📷 <a href="https://instagram.com/mateuscardosoartes_escritor" target="_blank">@mateuscardosoartes_escritor</a></p>
         <p>▶️ <a href="https://www.youtube.com/@fabricadehistoriascommateus" target="_blank">Fábrica de Histórias com Mateus</a></p>
+        <div class="social-icons">
+          <a href="https://instagram.com/mateuscardosoartes_escritor" target="_blank" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@fabricadehistoriascommateus" target="_blank" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a href="https://wa.me/5575991992399" target="_blank" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          </a>
+        </div>
       </div>
       <form class="contact-form" id="pedido-form">
         <input type="text" name="nome" placeholder="Seu nome" required>
@@ -387,6 +409,11 @@
     </div>
   </div>
 </footer>
+
+<!-- WhatsApp flutuante -->
+<a href="https://wa.me/5575991992399" target="_blank" class="wa-float" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+</a>
 
 <!-- lightbox imagem dos cards -->
 <div class="img-lightbox" id="img-lightbox" onclick="if(event.target===this)closeImgLb()">
