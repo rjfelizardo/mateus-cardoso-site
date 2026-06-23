@@ -95,7 +95,7 @@
   .faz-grid{display:flex;flex-wrap:wrap;gap:24px;list-style:none;padding:0;justify-content:flex-start;}
   .faz-card{
     display:flex;flex-direction:column;align-items:center;gap:12px;
-    width:140px;text-align:center;
+    width:140px;text-align:center;cursor:pointer;
   }
   .faz-card .faz-img{
     width:120px;height:120px;border-radius:50%;overflow:hidden;
@@ -107,6 +107,13 @@
   .faz-card .faz-img img{width:100%;height:100%;object-fit:cover;}
   .faz-card span{font-weight:700;font-size:.95rem;color:var(--ink);}
   @media(min-width:600px){.faz-card{width:160px;}.faz-card .faz-img{width:140px;height:140px;}}
+
+  /* ---------- lightbox imagem ---------- */
+  .img-lightbox{position:fixed;inset:0;background:rgba(30,43,51,.88);display:none;align-items:center;justify-content:center;z-index:300;padding:24px;flex-direction:column;gap:16px;}
+  .img-lightbox.open{display:flex;}
+  .img-lightbox img{max-width:90vw;max-height:75vh;border-radius:20px;border:4px solid var(--paper);box-shadow:0 24px 48px -16px rgba(30,43,51,.5);}
+  .img-lightbox .img-lb-label{font-family:var(--hand);font-size:1.5rem;color:var(--paper);text-align:center;}
+  .img-lightbox .img-lb-close{position:absolute;top:20px;right:20px;width:40px;height:40px;border-radius:50%;background:var(--orange);color:var(--paper);border:none;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
 
   /* ---------- livros ---------- */
   .livros{background:var(--paper-deep);}
@@ -256,23 +263,23 @@
       <h2>O que ele faz</h2>
     </div>
     <ul class="faz-grid">
-      <li class="faz-card">
+      <li class="faz-card" onclick="openImgLb('images/tucano-voando.jpeg','Livros infantis')">
         <div class="faz-img"><img src="images/tucano-voando.jpeg" alt="Livros infantis"></div>
         <span>Livros infantis</span>
       </li>
-      <li class="faz-card">
+      <li class="faz-card" onclick="openImgLb('images/ilustracao-floresta.jpeg','Ilustrações')">
         <div class="faz-img"><img src="images/ilustracao-floresta.jpeg" alt="Ilustrações"></div>
         <span>Ilustrações</span>
       </li>
-      <li class="faz-card">
+      <li class="faz-card" onclick="openImgLb('images/contacao-foto.jpg','Contações de história')">
         <div class="faz-img"><img src="images/contacao-foto.jpg" alt="Contações de história"></div>
         <span>Contações de história</span>
       </li>
-      <li class="faz-card">
+      <li class="faz-card" onclick="openImgLb('images/mateus-ukulele.jpeg','Música')">
         <div class="faz-img"><img src="images/mateus-ukulele.jpeg" alt="Música"></div>
         <span>Música</span>
       </li>
-      <li class="faz-card">
+      <li class="faz-card" onclick="openImgLb('images/ilustracao-igreja.jpeg','Arquitetura')">
         <div class="faz-img"><img src="images/ilustracao-igreja.jpeg" alt="Arquitetura"></div>
         <span>Arquitetura</span>
       </li>
@@ -383,6 +390,13 @@
   </div>
 </footer>
 
+<!-- lightbox imagem dos cards -->
+<div class="img-lightbox" id="img-lightbox" onclick="if(event.target===this)closeImgLb()">
+  <button class="img-lb-close" onclick="closeImgLb()" aria-label="Fechar">×</button>
+  <img id="img-lb-src" src="" alt="">
+  <div class="img-lb-label" id="img-lb-label"></div>
+</div>
+
 <div class="lightbox-overlay" id="lightbox-overlay">
   <div class="lightbox-box">
     <button class="lightbox-close" onclick="closePreview()" aria-label="Fechar">×</button>
@@ -396,6 +410,15 @@
 </div>
 
 <script>
+  function openImgLb(src, label){
+    document.getElementById('img-lb-src').src = src;
+    document.getElementById('img-lb-label').textContent = label;
+    document.getElementById('img-lightbox').classList.add('open');
+  }
+  function closeImgLb(){
+    document.getElementById('img-lightbox').classList.remove('open');
+  }
+
   var previewPages = {
     tucano:[{num:'',titulo:'O Tucano Eugênio',texto:'<p>Prévia em texto chegando em breve.</p>'}],
     emanuel:[
